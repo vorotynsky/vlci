@@ -17,10 +17,8 @@
 #include "lexer.hpp"
 
 Lexer::Lexer(std::istream &is)
-    : input (is), cur_token(Token::dot()) // TODO: make empty token
-{
-    moveNext();
-}
+    : input (is), cur_token()
+{ }
 
 char Lexer::peekChar() 
 {
@@ -49,22 +47,22 @@ void Lexer::moveNext()
     switch (peekChar())
     {
     case '(':
-        cur_token = Token::leftBraket();
+        cur_token = Token(Token::LEFT_BRAKET);
         break;
     case ')':
-        cur_token = Token::rightBraket();
+        cur_token = Token(Token::RIGHT_BRAKET);
         break;
     case '.':
-        cur_token = Token::dot();
+        cur_token = Token(Token::DOT);
         break;
     case '\\':
-        cur_token = Token::lambda();
+        cur_token = Token(Token::LAMBDA);
         break;
     default: // identificator
         std::string str;
         input >> str; // reading word
         movechar = false;
-        cur_token = Token::name(str);
+        cur_token = Token(str);
     }
 
     if (movechar)
