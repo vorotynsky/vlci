@@ -20,51 +20,59 @@ Lexer::Lexer(std::istream &is)
     : input (is), cur_token()
 { }
 
-char Lexer::peekChar() 
+bool Lexer::whiteSpaces() 
 {
     int c = input.peek();
+    bool result = false;
 
-    while (std::isspace(c) && c != EOF)  //TODO: LINE FEED
+    while (std::isspace(c) && c != EOF && c != '\n')
     {
         input.get();
         c = input.peek();
+        result = true;
     }
-    if (c == EOF)
-        return '\0';
-    return c;
+    return result;
 }
 
 char Lexer::moveChar() {
-    return input.get();
+    whiteSpaces();
+    int c = input.get();
+    return (c == EOF) ? '\0' : c;
+}
+
+void Lexer::readName(std::string &str)
+{
+    str.clear();
+    whiteSpaces();
+    int c = input.get();
+    while (std::isalnum(c))
+    {
+        str.push_back(c);
+        c = input.get();
+    }
+}
+
+Token Lexer::makeToken() 
+{
+    whiteSpaces();
+    char peekc;
+    
+    int c = input.peek();
+    peekc = (c == EOF) ? '\0' : c;
+
+    auto it = charToken.find(peekc);
+    if (it != charToken.end()) 
+    {
+        moveChar();
+        return it->second;
+    }
+    
+    std::string name;
+    readName(name);
+    return Token(name);
 }
 
 void Lexer::moveNext() 
 {
-    if (peekChar() == '\0')
-        return; // TODO: catch eof, lf
-
-    bool movechar = true;
-    switch (peekChar())
-    {
-    case '(':
-        cur_token = Token(Token::LEFT_BRAKET);
-        break;
-    case ')':
-        cur_token = Token(Token::RIGHT_BRAKET);
-        break;
-    case '.':
-        cur_token = Token(Token::DOT);
-        break;
-    case '\\':
-        cur_token = Token(Token::LAMBDA);
-        break;
-    default: // identificator
-        std::string str;
-        input >> str; // reading word
-        movechar = false;
-        cur_token = Token(str);
-    }
-
-    if (movechar)
-        moveChar();
+    cur_token = makeToken();
 }

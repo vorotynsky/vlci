@@ -19,6 +19,7 @@
 #include <iostream>
 #include <istream>
 #include <iterator>
+#include <map>
 
 #include "tokens.hpp"
 
@@ -28,7 +29,19 @@ private:
     std::istream &input;
     Token cur_token;
 
-    char peekChar();
+    const std::map<char, Token> charToken = 
+    {
+        { '(' ,  Token(Token::LEFT_BRAKET)  },
+        { ')' ,  Token(Token::RIGHT_BRAKET) },
+        { '\\',  Token(Token::LAMBDA)       },
+        { '.' ,  Token(Token::DOT)          },
+        { '\0',  Token(Token::EoF)          },
+        { '\n',  Token(Token::LF)           }
+    };
+
+    void readName(std::string &str);
+    Token makeToken();
+    bool whiteSpaces();
     char moveChar();
 public:
     Lexer(std::istream &is);
