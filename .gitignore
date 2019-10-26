@@ -80,6 +80,7 @@ dkms.conf
 
 # CMake
 cmake-build-*/
+build/
 
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
@@ -134,6 +135,10 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+
+# CTest
+*.tcl
+tests_*.cmake
 
 ### CMake Patch ###
 # External projects
