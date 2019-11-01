@@ -34,7 +34,8 @@ bool Lexer::whiteSpaces()
     return result;
 }
 
-char Lexer::moveChar() {
+char Lexer::moveChar() 
+{
     whiteSpaces();
     int c = input.get();
     return (c == EOF) ? '\0' : c;
@@ -50,6 +51,7 @@ void Lexer::readName(std::string &str)
         str.push_back(c);
         c = input.get();
     }
+    input.putback(c);
 }
 
 Token Lexer::makeToken() 
@@ -75,4 +77,8 @@ Token Lexer::makeToken()
 void Lexer::moveNext() 
 {
     cur_token = makeToken();
+}
+
+Token Lexer::current() {
+    return this->cur_token;
 }

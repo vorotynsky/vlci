@@ -47,5 +47,5 @@ public:
     Lexer(std::istream &is);
 
     void moveNext();
-    const Token &current();
+    Token current();
 };

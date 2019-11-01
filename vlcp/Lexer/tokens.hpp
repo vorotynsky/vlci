@@ -37,18 +37,16 @@ struct Token
 
 private:
     TokenType type;
-    std::string *tname;
+    std::string tname;
 
 public:
     Token(); // Empty token
     Token(TokenType type);
     Token(std::string &name); // Name token
 
-    ~Token();
-
     TokenType getType();
     const std::string& getName();
 
-    bool operator==(const Token &other);
-    bool operator!=(const Token &other);
+    bool operator==(const Token &other) const;
+    bool operator!=(const Token &other) const;
 };

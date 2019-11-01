@@ -19,7 +19,6 @@
 
 Token::Token() 
 {
-	this->tname = nullptr;
 	this->type = EMPTY;
 }
 
@@ -28,20 +27,13 @@ Token::Token(Token::TokenType type)
 	if (type == NAME || type == EMPTY)
 		throw std::invalid_argument("Invalid token type for this ctor. ");
 
-	this->tname = nullptr;
 	this->type = type;
 }
 
 Token::Token(std::string &name) 
 {
-	this->tname = new std::string(name);
+	this->tname = std::string(name);
 	this->type = NAME;
-}
-
-Token::~Token()
-{
-	if (this->tname != nullptr)
-		delete tname;
 }
 
 Token::TokenType Token::getType()
@@ -51,19 +43,17 @@ Token::TokenType Token::getType()
 
 const std::string& Token::getName()
 {
-	return *(this->tname);
+	return this->tname;
 }
 
-bool Token::operator==(const Token &other)
+bool Token::operator==(const Token &other) const
 {
-	if (other.type != type)
-		return false;
-	if (other.type != NAME)
-		return false;
-	return other.tname == tname;
+	if (type == NAME && other.type == NAME)
+		return other.tname == tname;
+	return type == other.type;
 }
 
-bool Token::operator!=(const Token &other)
+bool Token::operator!=(const Token &other) const
 {
 	return !this->operator==(other);
 }
