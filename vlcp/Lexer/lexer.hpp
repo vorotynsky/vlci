@@ -16,9 +16,8 @@
 
 #pragma once
 
-#include <iostream>
 #include <istream>
-#include <iterator>
+#include <string>
 #include <map>
 
 #include "tokens.hpp"
@@ -29,15 +28,7 @@ private:
     std::istream &input;
     Token cur_token;
 
-    const std::map<char, Token> charToken = 
-    {
-        { '(' ,  Token(Token::LEFT_BRAKET)  },
-        { ')' ,  Token(Token::RIGHT_BRAKET) },
-        { '\\',  Token(Token::LAMBDA)       },
-        { '.' ,  Token(Token::DOT)          },
-        { '\0',  Token(Token::EoF)          },
-        { '\n',  Token(Token::LF)           }
-    };
+    static const std::map<char, Token> charToken;
 
     void readName(std::string &str);
     Token makeToken();

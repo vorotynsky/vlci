@@ -16,6 +16,16 @@
 
 #include "lexer.hpp"
 
+const std::map<char, Token> Lexer::charToken = 
+{
+        { '(' ,  Token(Token::LEFT_BRAKET)  },
+        { ')' ,  Token(Token::RIGHT_BRAKET) },
+        { '\\',  Token(Token::LAMBDA)       },
+        { '.' ,  Token(Token::DOT)          },
+        { '\0',  Token(Token::EoF)          },
+        { '\n',  Token(Token::LF)           }
+    };
+
 Lexer::Lexer(std::istream &is)
     : input (is), cur_token()
 { }
@@ -56,19 +66,16 @@ void Lexer::readName(std::string &str)
 
 Token Lexer::makeToken() 
 {
-    whiteSpaces();
-    char peekc;
-    
-    int c = input.peek();
-    peekc = (c == EOF) ? '\0' : c;
+    char peekc = moveChar();
 
     auto it = charToken.find(peekc);
     if (it != charToken.end()) 
     {
-        moveChar();
         return it->second;
     }
     
+    input.unget();
+
     std::string name;
     readName(name);
     return Token(name);
