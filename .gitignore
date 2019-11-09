@@ -144,6 +144,10 @@ tests_*.cmake
 # External projects
 *-prefix/
 
+### Doxygen ###
+CMakeDoxyfile.in
+CMakeDoxygenDefaults.cmake
+
 ### VisualStudioCode ###
 .vscode/*
 

@@ -35,3 +35,16 @@ cmake --DENABLE_TESTING=ON  . # turn on testing
 cmake --build .
 ctest .
 ```
+
+### Documentation
+
+To enable/disable documentation generating toggle `GENERATE_DOCS`. Documentation generates if Doxygen installed.
+
+> Documentation building requires `Doxygen` and `moxygen`.
+
+```bash
+cmake --DGENERATE_DOCS=ON  .
+
+cmake --build .
+ctest .
+```
