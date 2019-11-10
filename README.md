@@ -45,6 +45,8 @@ To enable/disable documentation generating toggle `GENERATE_DOCS`. Documentation
 ```bash
 cmake --DGENERATE_DOCS=ON  .
 
-cmake --build .
-ctest .
+# build only documentation
+cmake --build . --target documentation
 ```
+
+*documentation target was added to `ALL`*.

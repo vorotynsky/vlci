@@ -23,7 +23,7 @@ if (DOXYGEN_FOUND)
     set(DOXYGEN_XML_OUTPUT ${DOCUMENTATION_DIRECTORY}/xml)
     
     doxygen_add_docs(
-        doxygen ALL
+        doxygen
         ${PROJECT_SOURCE_DIR}/vlcp # documentation only for `vlcp`.
         COMMENT "Generate man pages"
         )
@@ -34,9 +34,11 @@ if (DOXYGEN_FOUND)
             ${MOXYGEN} ${DOXYGEN_XML_OUTPUT}
             WORKING_DIRECTORY ${DOCUMENTATION_DIRECTORY}
         )
+        add_dependencies(moxygen doxygen)
     else()
         message(SEND_ERROR "Moxygen not found")
     endif()
 
-    add_custom_target(documentation doxygen moxygen)
+    add_custom_target(documentation ALL)
+    add_dependencies(documentation doxygen moxygen)
 endif()
