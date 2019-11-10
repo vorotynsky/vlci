@@ -18,8 +18,8 @@
 
 const std::map<char, Token> Lexer::charToken = 
 {
-        { '(' ,  Token(Token::LEFT_BRAKET)  },
-        { ')' ,  Token(Token::RIGHT_BRAKET) },
+        { '(' ,  Token(Token::LEFT_BRACKET)  },
+        { ')' ,  Token(Token::RIGHT_BRACKET) },
         { '\\',  Token(Token::LAMBDA)       },
         { '.' ,  Token(Token::DOT)          },
         { '\0',  Token(Token::EoF)          },

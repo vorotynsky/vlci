@@ -59,8 +59,8 @@
  Values                         | Descriptions                                
 --------------------------------|---------------------------------------------
 EMPTY            | 
-LEFT_BRAKET            | 
-RIGHT_BRAKET            | 
+LEFT_BRACKET            | 
+RIGHT_BRACKET            | 
 LAMBDA            | 
 DOT            | 
 NAME            | 

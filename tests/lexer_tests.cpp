@@ -40,8 +40,8 @@ TEST_CASE("one char input", "[lexer]")
 {
     const std::map<char, Token> charToken = 
     {
-        { '(' ,  Token(Token::LEFT_BRAKET)  },
-        { ')' ,  Token(Token::RIGHT_BRAKET) },
+        { '(' ,  Token(Token::LEFT_BRACKET)  },
+        { ')' ,  Token(Token::RIGHT_BRACKET) },
         { '\\',  Token(Token::LAMBDA)       },
         { '.' ,  Token(Token::DOT)          },
         { '\0',  Token(Token::EoF)          },
@@ -73,13 +73,13 @@ TEST_CASE("name token", "[lexer]")
     CHECK(lexer.current() == name_token);
 }
 
-TEST_CASE("name in brakets", "[lexer]") 
+TEST_CASE("name in brackets", "[lexer]") 
 {
     std::string expected = "itsname";
     std::istringstream input ("(" + expected + ")");
 
     std::vector<Token> tokens = 
-        { Token(Token::LEFT_BRAKET), Token(expected), Token(Token::RIGHT_BRAKET) };
+        { Token(Token::LEFT_BRACKET), Token(expected), Token(Token::RIGHT_BRACKET) };
     
     Lexer lexer(input);
 
@@ -99,8 +99,8 @@ TEST_CASE("y-combinator", "[lexer]")
     {
         Token lambda = Token(Token::LAMBDA);
         Token dot = Token(Token::DOT);
-        Token lb = Token(Token::LEFT_BRAKET);
-        Token rb = Token(Token::RIGHT_BRAKET);
+        Token lb = Token(Token::LEFT_BRACKET);
+        Token rb = Token(Token::RIGHT_BRACKET);
         std::string f_str = "f", x_str = "x";
         Token f = Token(f_str);
         Token x = Token(x_str);
