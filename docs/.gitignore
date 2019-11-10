@@ -1,5 +1,7 @@
 xml/
 Doxyfile.doxydoc
+[Dd]oxyfile*
+DOXYFILE*
 
-../CMakeDoxyfile.in
-../CMakeDoxygenDefaults.cmake
+CMakeDoxyfile.in
+CMakeDoxygenDefaults.cmake
