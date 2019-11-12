@@ -22,6 +22,9 @@
 
 #include "tokens.hpp"
 
+/**
+ * @brief A Lexer transforms an input to a Token sequence.
+ */
 class Lexer
 {
 private:
@@ -35,8 +38,24 @@ private:
     bool whiteSpaces();
     char moveChar();
 public:
+    /**
+     * @brief Creates a new Lexer instance based on the input stream.
+     * 
+     * @param[in] is A input stream.
+     */
     Lexer(std::istream &is);
 
+    /**
+     * @brief Read the next Token from the stream.
+     */
     void moveNext();
+
+    /**
+     * @brief Returns the token that was read from the stream.
+     * 
+     * @note In case the function Lexer::moveNext() wasn't called, the current token has an `EMPTY` type.
+     * 
+     * @return Token The read token.
+     */
     Token current();
 };

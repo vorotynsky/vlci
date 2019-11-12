@@ -14,6 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * @file vlcp.h
+ * @brief header file of lambda processor
+ * @author Vorotynsky Maxim
+ * @date 2019
+ * @copyright GNU General Public License
+ */
+
 #pragma once
 
 #include "Lexer/tokens.hpp"
