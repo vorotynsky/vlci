@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.8)
 find_package(Doxygen)
 option(GENERATE_DOCS "Genetates documentation (require Doxygen)" DOXYGEN_FOUND)
 
-if (DOXYGEN_FOUND)
+if (GENERATE_DOCS)
     find_package(Doxygen REQUIRED)
     find_program(MOXYGEN moxygen REQUIRED)
 
