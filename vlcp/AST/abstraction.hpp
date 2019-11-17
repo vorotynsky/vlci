@@ -20,15 +20,20 @@
 #include "variable.hpp"
 
 
-class Abstraction final : public LambdaExpression {
+class Abstraction final : public LambdaExpression 
+{
+public:
 
-    class BoundedVariable final : public Variable {
+    class BoundedVariable final : public Variable 
+    {
     private:
         const Abstraction *linkedAbstraction;
     public:
         BoundedVariable(const std::string &name, const Abstraction *abstraction);
 
         ~BoundedVariable() override;
+
+        Abstraction const *getAbstraction() const;
     };
 
 private:
@@ -37,7 +42,7 @@ private:
 public:
     Abstraction(const LambdaExpression *lambda, const Variable &var);
 
-    const BoundedVariable *getBoundedVariable() const;
+    BoundedVariable const *getBoundedVariable() const;
 
     ~Abstraction() override;
 };

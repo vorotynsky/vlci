@@ -14,20 +14,14 @@
 // You should have received a copy of the GNU General Public License 
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include "variable.hpp"
 
-#include "lambda.hpp"
+Variable::Variable(const std::string &name)
+    : LambdaExpression(), name(name) { }
 
-#include <string>
+Variable::~Variable() = default;
 
-class Variable : public LambdaExpression 
+const std::string &Variable::getName() const noexcept 
 {
-private:
-    const std::string name;
-public:
-    Variable(const std::string &name);
-
-    virtual ~Variable() override;
-
-    virtual const std::string &getName() const noexcept;
-};
+    return this->name;
+}

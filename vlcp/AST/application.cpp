@@ -14,20 +14,15 @@
 // You should have received a copy of the GNU General Public License 
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include "application.hpp"
 
-#include "lambda.hpp"
+#include <stdexcept>
 
-#include <string>
-
-class Variable : public LambdaExpression 
+Application::Application(const LambdaExpression *base, const LambdaExpression *argument) 
+    : LambdaExpression() 
 {
-private:
-    const std::string name;
-public:
-    Variable(const std::string &name);
+    this->base     = base     ? base     : throw std::invalid_argument("base is null.");
+    this->argument = argument ? argument : throw std::invalid_argument("argument is null.");
+}
 
-    virtual ~Variable() override;
-
-    virtual const std::string &getName() const noexcept;
-};
+Application::~Application() = default;
