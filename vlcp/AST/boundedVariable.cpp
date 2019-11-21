@@ -15,26 +15,26 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "abstraction.hpp"
+#include "variable.hpp"
 
 #include <stdexcept>
 
-Abstraction::Abstraction(const LambdaExpression *lambda, const Variable &var) 
-    : LambdaExpression(), 
-      abstractVariable(var.getName(), this) 
+Abstraction::BoundedVariable::BoundedVariable(const std::string &name, const Abstraction *abstraction)
+    : Variable(name) 
 {
-    this->lambda = lambda ? lambda : throw std::invalid_argument("lambda is null.");
+    this->linkedAbstraction = abstraction ? abstraction : throw std::invalid_argument("abstraction is null.");
 }
 
-Abstraction::~Abstraction() = default;
+Abstraction::BoundedVariable::~BoundedVariable() = default;
 
-Abstraction::BoundedVariable const *Abstraction::getBoundedVariable() const 
+Abstraction const *Abstraction::BoundedVariable::getAbstraction() const 
 {
-    return &(this->abstractVariable);
+    return this->linkedAbstraction;
 }
 
-bool Abstraction::Equals(const LambdaExpression &other) const {
-    auto aother = static_cast<const Abstraction &>(other);
-        
-    return abstractVariable == aother.abstractVariable 
-        && lambda == aother.lambda;
+bool Abstraction::BoundedVariable::Equals(const LambdaExpression &other) const {
+    auto bvother = static_cast<const BoundedVariable &>(other);
+
+    return linkedAbstraction == bvother.linkedAbstraction
+        && Variable::Equals(other);
 }

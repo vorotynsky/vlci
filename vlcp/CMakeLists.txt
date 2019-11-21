@@ -7,4 +7,5 @@ add_library (LambdaProcessor
     "AST/variable.cpp"
     "AST/application.cpp"
     "AST/abstraction.cpp"
+    "AST/boundedVariable.cpp"
     )

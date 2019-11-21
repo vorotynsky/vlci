@@ -24,6 +24,10 @@ class Variable : public LambdaExpression
 {
 private:
     const std::string name;
+
+protected:
+    bool Equals(const LambdaExpression &other) const override;
+
 public:
     Variable(const std::string &name);
 

@@ -22,6 +22,10 @@ class Application final : public LambdaExpression {
 private:
     const LambdaExpression *base;
     const LambdaExpression *argument;
+
+protected:
+    bool Equals(const LambdaExpression &other) const override;
+
 public:
     Application(const LambdaExpression *base, const LambdaExpression *argument);
 

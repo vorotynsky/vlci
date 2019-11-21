@@ -25,4 +25,11 @@ Application::Application(const LambdaExpression *base, const LambdaExpression *a
     this->argument = argument ? argument : throw std::invalid_argument("argument is null.");
 }
 
+bool Application::Equals(const LambdaExpression &other) const {
+    auto aother = static_cast<const Application &> (other);
+
+    return base == aother.base
+        && argument == aother.argument;
+}
+
 Application::~Application() = default;

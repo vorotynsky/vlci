@@ -25,3 +25,9 @@ const std::string &Variable::getName() const noexcept
 {
     return this->name;
 }
+
+bool Variable::Equals(const LambdaExpression &other) const {
+    auto vother = static_cast<const Variable &> (other);
+
+    return name == vother.name;
+}

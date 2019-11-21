@@ -38,6 +38,21 @@
 class LambdaExpression {
 protected:
     LambdaExpression();
+
+    friend bool operator==(const LambdaExpression &left, const LambdaExpression &right);
+    friend bool operator!=(const LambdaExpression &left, const LambdaExpression &right);
+
+    virtual bool Equals(const LambdaExpression &other) const = 0;
 public:
     virtual ~LambdaExpression() = 0;
 };
+
+
+bool operator==(const LambdaExpression &left, const LambdaExpression &right) {
+    return typeid(left) == typeid(right)
+        && left.Equals(right);
+}
+
+bool operator!=(const LambdaExpression &left, const LambdaExpression &right) {
+    return !(left == right);
+}

@@ -28,6 +28,9 @@ public:
     {
     private:
         const Abstraction *linkedAbstraction;
+    protected:
+        bool Equals(const LambdaExpression &other) const override;
+
     public:
         BoundedVariable(const std::string &name, const Abstraction *abstraction);
 
@@ -39,6 +42,9 @@ public:
 private:
     const BoundedVariable abstractVariable;
     const LambdaExpression *lambda;
+protected:
+    bool Equals(const LambdaExpression &other) const override;
+
 public:
     Abstraction(const LambdaExpression *lambda, const Variable &var);
 
