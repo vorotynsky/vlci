@@ -4,6 +4,7 @@ add_library (LambdaProcessor
     "Lexer/tokens.cpp" 
     "Lexer/lexer.cpp"
 
+    "AST/lambda.cpp"
     "AST/variable.cpp"
     "AST/application.cpp"
     "AST/abstraction.cpp"
