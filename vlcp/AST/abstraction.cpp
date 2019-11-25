@@ -34,7 +34,10 @@ Abstraction::BoundedVariable const *Abstraction::getBoundedVariable() const
 
 bool Abstraction::Equals(const LambdaExpression &other) const {
     auto aother = static_cast<const Abstraction &>(other);
-        
-    return abstractVariable == aother.abstractVariable 
+    
+    auto variable = static_cast<const Variable &>(abstractVariable);
+    auto ovariable = static_cast<const Variable&>(aother.abstractVariable);
+
+    return variable == ovariable
         && lambda == aother.lambda;
 }
