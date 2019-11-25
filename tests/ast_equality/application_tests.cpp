@@ -27,21 +27,8 @@ TEST_CASE("equality of application", "[ast]")
 {
     LambdaContainer lambdas = LambdaContainer();
     for (auto lambda1 : lambdas.lambdas)
-    {
-        LambdaExpression *copy1 = (LambdaExpression *) malloc(sizeof(LambdaExpression));
-        std::memcpy(copy1, lambda1, sizeof(LambdaExpression));
-        
         for (auto lambda2 : lambdas.lambdas)
-        {
-            LambdaExpression *copy2 = (LambdaExpression *) malloc(sizeof(LambdaExpression));
-            std::memcpy(copy1, lambda1, sizeof(LambdaExpression));
-            
-            Application(copy1, copy2);
-            
-            free(copy2);
-        }
-        free(copy1);
-    }
+            CHECK(Application(lambda1, lambda2) == Application(lambda1, lambda2));
 }
 
 TEST_CASE("inequality of application", "[ast]")
