@@ -18,6 +18,11 @@
 
 #include "lambda.hpp"
 
+/**
+ * @brief Application of 2 lambda terms.
+ * 
+ * Applying a function to an argument, \f$ (M N) \f$, where `M` and `N` are lambda terms.
+ */
 class Application final : public LambdaExpression {
 private:
     const LambdaExpression *base;
@@ -27,6 +32,12 @@ protected:
     bool Equals(const LambdaExpression &other) const override;
 
 public:
+    /**
+     * @brief Construct a new Application object.
+     * 
+     * @param base function (`M`) lambda term.
+     * @param argument argument (`N`) lambda term.
+     */
     Application(const LambdaExpression *base, const LambdaExpression *argument);
 
     ~Application() override;

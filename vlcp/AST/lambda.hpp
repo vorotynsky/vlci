@@ -37,12 +37,44 @@
  */
 class LambdaExpression {
 protected:
+    /**
+     * @brief Construct a new Lambda Expression object.
+     */
     LambdaExpression() = default;
 
     friend bool operator==(const LambdaExpression &left, const LambdaExpression &right);
     friend bool operator!=(const LambdaExpression &left, const LambdaExpression &right);
 
+    /**
+     * @brief Virtual function for compare 2 lambda expressions. Used in `operator==`.
+     * 
+     * @return `false` if the specified tokens are equal to the current tokens; otherwise, `true`.
+     */
     virtual bool Equals(const LambdaExpression &other) const = 0;
 public:
     virtual ~LambdaExpression() = default;
 };
+
+/**
+ * @brief Determines whether two tokens instances are equal.
+ * 
+ * Compare lambdas by value without reduction.
+ * 
+ * @param left A lambda expression.
+ * @param right A lambda expression.
+ * @return true if left and right labda expression are equals.
+ * @return false if left and right lambda expression are not equals.
+ */
+bool operator==(const LambdaExpression &left, const LambdaExpression &right);
+
+/**
+ * @brief Determines whether two tokens instances are not equal.
+ * 
+ * Compare lambdas by value without reduction.
+ * 
+ * @param left A lambda expression.
+ * @param right A lambda expression.
+ * @return true if left and right labda expression are not equals.
+ * @return false if left and right lambda expression are equals.
+ */
+bool operator!=(const LambdaExpression &left, const LambdaExpression &right);

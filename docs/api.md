@@ -2,8 +2,176 @@
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
+`class `[`Abstraction`](#classAbstraction) | [Abstraction](#classAbstraction) of lambda term.
+`class `[`Application`](#classApplication) | [Application](#classApplication) of 2 lambda terms.
+`class `[`Abstraction::BoundedVariable`](#classAbstraction_1_1BoundedVariable) | The bounded variable lambda term.
+`class `[`LambdaExpression`](#classLambdaExpression) | The base class for lambda expression AST-node.
 `class `[`Lexer`](#classLexer) | A [Lexer](#classLexer) transforms an input to a [Token](#structToken) sequence.
+`class `[`Variable`](#classVariable) | The variable lambda term.
 `struct `[`Token`](#structToken) | A [Token](#structToken) is a unit what can be obtained from the input.
+
+# class `Abstraction` 
+
+```
+class Abstraction
+  : public LambdaExpression
+```  
+
+[Abstraction](#classAbstraction) of lambda term.
+
+> Todo: make a function that builds a tree where free variables substituted to bounded. 
+
+Function definition (M is a lambda term). The variable x becomes bound in the expression.
+
+$$
+(\lambda v. M)
+$$
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public  `[`Abstraction`](#classAbstraction_1a42d21d00e6bb44d02a856dedf16b4346)`(const `[`LambdaExpression`](#classLambdaExpression)` * lambda,const `[`Variable`](#classVariable)` & var)` | Construct a new [Abstraction](#classAbstraction) object.
+`public const `[`BoundedVariable`](#classAbstraction_1_1BoundedVariable)` * `[`getBoundedVariable`](#classAbstraction_1a45bfe7911111519d4bfc0f13b1e7581b)`() const` | Get the bounded variable of the current abstraction.
+`public  `[`~Abstraction`](#classAbstraction_1a22c9b77248cc66d92147882cdef07f7d)`()` | 
+`protected virtual bool `[`Equals`](#classAbstraction_1a8829a2e35384c0faface26f9cbb08e85)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` | Virtual function for compare 2 lambda expressions. Used in `operator==`.
+
+## Members
+
+#### `public  `[`Abstraction`](#classAbstraction_1a42d21d00e6bb44d02a856dedf16b4346)`(const `[`LambdaExpression`](#classLambdaExpression)` * lambda,const `[`Variable`](#classVariable)` & var)` 
+
+Construct a new [Abstraction](#classAbstraction) object.
+
+#### Parameters
+* `lambda` lambda term (`M`). 
+
+* `var` variable ('v') for make bounded variable.
+
+#### `public const `[`BoundedVariable`](#classAbstraction_1_1BoundedVariable)` * `[`getBoundedVariable`](#classAbstraction_1a45bfe7911111519d4bfc0f13b1e7581b)`() const` 
+
+Get the bounded variable of the current abstraction.
+
+A bounded variable is a field of this class. After destroying an abstraction node the bounded variable will be unreachable.
+
+#### Returns
+[BoundedVariable](#classAbstraction_1_1BoundedVariable) const* bounded variable that linked to the current object.
+
+#### `public  `[`~Abstraction`](#classAbstraction_1a22c9b77248cc66d92147882cdef07f7d)`()` 
+
+#### `protected virtual bool `[`Equals`](#classAbstraction_1a8829a2e35384c0faface26f9cbb08e85)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` 
+
+Virtual function for compare 2 lambda expressions. Used in `operator==`.
+
+#### Returns
+`false` if the specified tokens are equal to the current tokens; otherwise, `true`.
+
+# class `Application` 
+
+```
+class Application
+  : public LambdaExpression
+```  
+
+[Application](#classApplication) of 2 lambda terms.
+
+Applying a function to an argument, $ (M N) $, where `M` and `N` are lambda terms.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public  `[`Application`](#classApplication_1ab35fbc71c5973f5ece36792e5ffddd48)`(const `[`LambdaExpression`](#classLambdaExpression)` * base,const `[`LambdaExpression`](#classLambdaExpression)` * argument)` | Construct a new [Application](#classApplication) object.
+`public  `[`~Application`](#classApplication_1a444b0b6d9162b14d5262b81bd75586df)`()` | 
+`protected virtual bool `[`Equals`](#classApplication_1a07ab7a13e74703c62c893c2235b80493)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` | Virtual function for compare 2 lambda expressions. Used in `operator==`.
+
+## Members
+
+#### `public  `[`Application`](#classApplication_1ab35fbc71c5973f5ece36792e5ffddd48)`(const `[`LambdaExpression`](#classLambdaExpression)` * base,const `[`LambdaExpression`](#classLambdaExpression)` * argument)` 
+
+Construct a new [Application](#classApplication) object.
+
+#### Parameters
+* `base` function (`M`) lambda term. 
+
+* `argument` argument (`N`) lambda term.
+
+#### `public  `[`~Application`](#classApplication_1a444b0b6d9162b14d5262b81bd75586df)`()` 
+
+#### `protected virtual bool `[`Equals`](#classApplication_1a07ab7a13e74703c62c893c2235b80493)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` 
+
+Virtual function for compare 2 lambda expressions. Used in `operator==`.
+
+#### Returns
+`false` if the specified tokens are equal to the current tokens; otherwise, `true`.
+
+# class `Abstraction::BoundedVariable` 
+
+```
+class Abstraction::BoundedVariable
+  : public Variable
+```  
+
+The bounded variable lambda term.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public  `[`BoundedVariable`](#classAbstraction_1_1BoundedVariable_1a995b637b3a0754d3582fbe9b815a583c)`(const std::string & name,const `[`Abstraction`](#classAbstraction)` * abstraction)` | Construct a new Bounded [Variable](#classVariable) object.
+`public  `[`~BoundedVariable`](#classAbstraction_1_1BoundedVariable_1a04d4401637fd2fca70a9dc36834bdef1)`()` | 
+`public const `[`Abstraction`](#classAbstraction)` * `[`getAbstraction`](#classAbstraction_1_1BoundedVariable_1abd37d9cf9d27312a701256fd5d352449)`() const` | Get the linked [Abstraction](#classAbstraction) object.
+`protected virtual bool `[`Equals`](#classAbstraction_1_1BoundedVariable_1a5f2f50bda08394c86a6364ae6900d5d9)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` | Virtual function for compare 2 lambda expressions. Used in `operator==`.
+
+## Members
+
+#### `public  `[`BoundedVariable`](#classAbstraction_1_1BoundedVariable_1a995b637b3a0754d3582fbe9b815a583c)`(const std::string & name,const `[`Abstraction`](#classAbstraction)` * abstraction)` 
+
+Construct a new Bounded [Variable](#classVariable) object.
+
+#### Parameters
+* `name` the name of the new bounded variable. 
+
+* `abstraction` the pointer to abstraction with the variable will be linked.
+
+#### `public  `[`~BoundedVariable`](#classAbstraction_1_1BoundedVariable_1a04d4401637fd2fca70a9dc36834bdef1)`()` 
+
+#### `public const `[`Abstraction`](#classAbstraction)` * `[`getAbstraction`](#classAbstraction_1_1BoundedVariable_1abd37d9cf9d27312a701256fd5d352449)`() const` 
+
+Get the linked [Abstraction](#classAbstraction) object.
+
+#### `protected virtual bool `[`Equals`](#classAbstraction_1_1BoundedVariable_1a5f2f50bda08394c86a6364ae6900d5d9)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` 
+
+Virtual function for compare 2 lambda expressions. Used in `operator==`.
+
+#### Returns
+`false` if the specified tokens are equal to the current tokens; otherwise, `true`.
+
+# class `LambdaExpression` 
+
+The base class for lambda expression AST-node.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public virtual  `[`~LambdaExpression`](#classLambdaExpression_1a8e0f468fc98e57dd79e083563f2fd49d)`() = default` | 
+`protected  `[`LambdaExpression`](#classLambdaExpression_1a609592c8b46d7a968465b41c7850bdb2)`() = default` | Construct a new Lambda Expression object.
+`protected bool `[`Equals`](#classLambdaExpression_1a89528839809367803f65220c1aa8e39f)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` | Virtual function for compare 2 lambda expressions. Used in `operator==`.
+
+## Members
+
+#### `public virtual  `[`~LambdaExpression`](#classLambdaExpression_1a8e0f468fc98e57dd79e083563f2fd49d)`() = default` 
+
+#### `protected  `[`LambdaExpression`](#classLambdaExpression_1a609592c8b46d7a968465b41c7850bdb2)`() = default` 
+
+Construct a new Lambda Expression object.
+
+#### `protected bool `[`Equals`](#classLambdaExpression_1a89528839809367803f65220c1aa8e39f)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` 
+
+Virtual function for compare 2 lambda expressions. Used in `operator==`.
+
+#### Returns
+`false` if the specified tokens are equal to the current tokens; otherwise, `true`.
 
 # class `Lexer` 
 
@@ -38,6 +206,46 @@ In case the function [Lexer::moveNext()](#classLexer_1a2b644d8f7a7a48a21142c437b
 
 #### Returns
 [Token](#structToken) The read token.
+
+# class `Variable` 
+
+```
+class Variable
+  : public LambdaExpression
+```  
+
+The variable lambda term.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public  `[`Variable`](#classVariable_1aae9a2273769092961aee44f8cd87bf85)`(const std::string & name)` | Construct a new [Variable](#classVariable) object.
+`public virtual  `[`~Variable`](#classVariable_1a0c619221ab7f65166baf4555c356d83c)`()` | 
+`public virtual const std::string & `[`getName`](#classVariable_1a18c3e5f04c3e8d3b135fb965df5c08a3)`() const noexcept` | Get the name of the current variable.
+`protected virtual bool `[`Equals`](#classVariable_1a87873b674c35f1a58decf7a32b64effa)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` | Virtual function for compare 2 lambda expressions. Used in `operator==`.
+
+## Members
+
+#### `public  `[`Variable`](#classVariable_1aae9a2273769092961aee44f8cd87bf85)`(const std::string & name)` 
+
+Construct a new [Variable](#classVariable) object.
+
+#### Parameters
+* `name` the name of the new variable
+
+#### `public virtual  `[`~Variable`](#classVariable_1a0c619221ab7f65166baf4555c356d83c)`()` 
+
+#### `public virtual const std::string & `[`getName`](#classVariable_1a18c3e5f04c3e8d3b135fb965df5c08a3)`() const noexcept` 
+
+Get the name of the current variable.
+
+#### `protected virtual bool `[`Equals`](#classVariable_1a87873b674c35f1a58decf7a32b64effa)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` 
+
+Virtual function for compare 2 lambda expressions. Used in `operator==`.
+
+#### Returns
+`false` if the specified tokens are equal to the current tokens; otherwise, `true`.
 
 # struct `Token` 
 

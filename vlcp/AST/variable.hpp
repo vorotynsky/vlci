@@ -20,6 +20,9 @@
 
 #include <string>
 
+/**
+ * @brief The variable lambda term.
+ */
 class Variable : public LambdaExpression 
 {
 private:
@@ -29,9 +32,17 @@ protected:
     bool Equals(const LambdaExpression &other) const override;
 
 public:
+    /**
+     * @brief Construct a new Variable object
+     * 
+     * @param name the name of the new variable
+     */
     Variable(const std::string &name);
 
     virtual ~Variable() override;
 
+    /**
+     * @brief Get the name of the current variable.
+     */
     virtual const std::string &getName() const noexcept;
 };
