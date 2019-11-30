@@ -50,7 +50,7 @@ public:
          */
         BoundedVariable(const std::string &name, const Abstraction *abstraction);
 
-        ~BoundedVariable() override;
+        virtual ~BoundedVariable();
 
         /**
          * @brief Get the linked Abstraction object.
@@ -82,5 +82,5 @@ public:
      */
     BoundedVariable const *getBoundedVariable() const;
 
-    ~Abstraction() override;
+    virtual ~Abstraction();
 };

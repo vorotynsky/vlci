@@ -39,7 +39,7 @@ public:
      */
     Variable(const std::string &name);
 
-    virtual ~Variable() override;
+    virtual ~Variable();
 
     /**
      * @brief Get the name of the current variable.

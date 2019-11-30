@@ -33,7 +33,7 @@ $$
 --------------------------------|---------------------------------------------
 `public  `[`Abstraction`](#classAbstraction_1a42d21d00e6bb44d02a856dedf16b4346)`(const `[`LambdaExpression`](#classLambdaExpression)` * lambda,const `[`Variable`](#classVariable)` & var)` | Construct a new [Abstraction](#classAbstraction) object.
 `public const `[`BoundedVariable`](#classAbstraction_1_1BoundedVariable)` * `[`getBoundedVariable`](#classAbstraction_1a45bfe7911111519d4bfc0f13b1e7581b)`() const` | Get the bounded variable of the current abstraction.
-`public  `[`~Abstraction`](#classAbstraction_1a22c9b77248cc66d92147882cdef07f7d)`()` | 
+`public virtual  `[`~Abstraction`](#classAbstraction_1a03f0ab5980a9dd56feb18ea35b726a8e)`()` | 
 `protected virtual bool `[`Equals`](#classAbstraction_1a8829a2e35384c0faface26f9cbb08e85)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` | Virtual function for compare 2 lambda expressions. Used in `operator==`.
 
 ## Members
@@ -56,7 +56,7 @@ A bounded variable is a field of this class. After destroying an abstraction nod
 #### Returns
 [BoundedVariable](#classAbstraction_1_1BoundedVariable) const* bounded variable that linked to the current object.
 
-#### `public  `[`~Abstraction`](#classAbstraction_1a22c9b77248cc66d92147882cdef07f7d)`()` 
+#### `public virtual  `[`~Abstraction`](#classAbstraction_1a03f0ab5980a9dd56feb18ea35b726a8e)`()` 
 
 #### `protected virtual bool `[`Equals`](#classAbstraction_1a8829a2e35384c0faface26f9cbb08e85)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` 
 
@@ -81,7 +81,7 @@ Applying a function to an argument, $ (M N) $, where `M` and `N` are lambda term
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `public  `[`Application`](#classApplication_1ab35fbc71c5973f5ece36792e5ffddd48)`(const `[`LambdaExpression`](#classLambdaExpression)` * base,const `[`LambdaExpression`](#classLambdaExpression)` * argument)` | Construct a new [Application](#classApplication) object.
-`public  `[`~Application`](#classApplication_1a444b0b6d9162b14d5262b81bd75586df)`()` | 
+`public virtual  `[`~Application`](#classApplication_1a748bca84fefb9c12661cfaa2f623748d)`()` | 
 `protected virtual bool `[`Equals`](#classApplication_1a07ab7a13e74703c62c893c2235b80493)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` | Virtual function for compare 2 lambda expressions. Used in `operator==`.
 
 ## Members
@@ -95,7 +95,7 @@ Construct a new [Application](#classApplication) object.
 
 * `argument` argument (`N`) lambda term.
 
-#### `public  `[`~Application`](#classApplication_1a444b0b6d9162b14d5262b81bd75586df)`()` 
+#### `public virtual  `[`~Application`](#classApplication_1a748bca84fefb9c12661cfaa2f623748d)`()` 
 
 #### `protected virtual bool `[`Equals`](#classApplication_1a07ab7a13e74703c62c893c2235b80493)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` 
 
@@ -118,7 +118,7 @@ The bounded variable lambda term.
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `public  `[`BoundedVariable`](#classAbstraction_1_1BoundedVariable_1a995b637b3a0754d3582fbe9b815a583c)`(const std::string & name,const `[`Abstraction`](#classAbstraction)` * abstraction)` | Construct a new Bounded [Variable](#classVariable) object.
-`public  `[`~BoundedVariable`](#classAbstraction_1_1BoundedVariable_1a04d4401637fd2fca70a9dc36834bdef1)`()` | 
+`public virtual  `[`~BoundedVariable`](#classAbstraction_1_1BoundedVariable_1abfe979374d88f582cb072e116ec0c796)`()` | 
 `public const `[`Abstraction`](#classAbstraction)` * `[`getAbstraction`](#classAbstraction_1_1BoundedVariable_1abd37d9cf9d27312a701256fd5d352449)`() const` | Get the linked [Abstraction](#classAbstraction) object.
 `protected virtual bool `[`Equals`](#classAbstraction_1_1BoundedVariable_1a5f2f50bda08394c86a6364ae6900d5d9)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` | Virtual function for compare 2 lambda expressions. Used in `operator==`.
 
@@ -133,7 +133,7 @@ Construct a new Bounded [Variable](#classVariable) object.
 
 * `abstraction` the pointer to abstraction with the variable will be linked.
 
-#### `public  `[`~BoundedVariable`](#classAbstraction_1_1BoundedVariable_1a04d4401637fd2fca70a9dc36834bdef1)`()` 
+#### `public virtual  `[`~BoundedVariable`](#classAbstraction_1_1BoundedVariable_1abfe979374d88f582cb072e116ec0c796)`()` 
 
 #### `public const `[`Abstraction`](#classAbstraction)` * `[`getAbstraction`](#classAbstraction_1_1BoundedVariable_1abd37d9cf9d27312a701256fd5d352449)`() const` 
 
@@ -221,7 +221,7 @@ The variable lambda term.
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `public  `[`Variable`](#classVariable_1aae9a2273769092961aee44f8cd87bf85)`(const std::string & name)` | Construct a new [Variable](#classVariable) object.
-`public virtual  `[`~Variable`](#classVariable_1a0c619221ab7f65166baf4555c356d83c)`()` | 
+`public virtual  `[`~Variable`](#classVariable_1acfc14d0ad77af53025f890b4d3a7745a)`()` | 
 `public virtual const std::string & `[`getName`](#classVariable_1a18c3e5f04c3e8d3b135fb965df5c08a3)`() const noexcept` | Get the name of the current variable.
 `protected virtual bool `[`Equals`](#classVariable_1a87873b674c35f1a58decf7a32b64effa)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` | Virtual function for compare 2 lambda expressions. Used in `operator==`.
 
@@ -234,7 +234,7 @@ Construct a new [Variable](#classVariable) object.
 #### Parameters
 * `name` the name of the new variable
 
-#### `public virtual  `[`~Variable`](#classVariable_1a0c619221ab7f65166baf4555c356d83c)`()` 
+#### `public virtual  `[`~Variable`](#classVariable_1acfc14d0ad77af53025f890b4d3a7745a)`()` 
 
 #### `public virtual const std::string & `[`getName`](#classVariable_1a18c3e5f04c3e8d3b135fb965df5c08a3)`() const noexcept` 
 

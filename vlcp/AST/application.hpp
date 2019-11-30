@@ -40,5 +40,5 @@ public:
      */
     Application(const LambdaExpression *base, const LambdaExpression *argument);
 
-    ~Application() override;
+    virtual ~Application();
 };
