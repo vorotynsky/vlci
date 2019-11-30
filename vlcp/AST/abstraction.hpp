@@ -31,7 +31,6 @@
 class Abstraction final : public LambdaExpression 
 {
 public:
-
     /**
      * @brief The bounded variable lambda term.
      */
@@ -66,7 +65,6 @@ protected:
     bool Equals(const LambdaExpression &other) const override;
 
 public:
-
     /**
      * @brief Construct a new Abstraction object
      * 
