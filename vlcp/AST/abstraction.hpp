@@ -74,6 +74,15 @@ public:
     Abstraction(const LambdaExpression *lambda, const Variable &var);
 
     /**
+     * @brief Get the base of the abstraction (`M`). 
+     * 
+     * In other words the body of the lambda-function.
+     * 
+     * @return LambdaExpression const* Not null LambdaExpression.
+     */
+    LambdaExpression const *getAbstractionBase() const;
+
+    /**
      * @brief Get the bounded variable of the current abstraction.
      * 
      * @warning A bounded variable is a field of this class. After destroying an abstraction node the bounded variable will be unreachable.

@@ -32,6 +32,7 @@ $$
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `public  `[`Abstraction`](#classAbstraction_1a42d21d00e6bb44d02a856dedf16b4346)`(const `[`LambdaExpression`](#classLambdaExpression)` * lambda,const `[`Variable`](#classVariable)` & var)` | Construct a new [Abstraction](#classAbstraction) object.
+`public const `[`LambdaExpression`](#classLambdaExpression)` * `[`getAbstractionBase`](#classAbstraction_1a57c1873b1de1a76e15c7ae45b6017d09)`() const` | Get the base of the abstraction (`M`).
 `public const `[`BoundedVariable`](#classAbstraction_1_1BoundedVariable)` * `[`getBoundedVariable`](#classAbstraction_1a45bfe7911111519d4bfc0f13b1e7581b)`() const` | Get the bounded variable of the current abstraction.
 `public virtual  `[`~Abstraction`](#classAbstraction_1a03f0ab5980a9dd56feb18ea35b726a8e)`()` | 
 `protected virtual bool `[`Equals`](#classAbstraction_1a8829a2e35384c0faface26f9cbb08e85)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` | Virtual function for compare 2 lambda expressions. Used in `operator==`.
@@ -46,6 +47,15 @@ Construct a new [Abstraction](#classAbstraction) object.
 * `lambda` lambda term (`M`). 
 
 * `var` variable ('v') for make bounded variable.
+
+#### `public const `[`LambdaExpression`](#classLambdaExpression)` * `[`getAbstractionBase`](#classAbstraction_1a57c1873b1de1a76e15c7ae45b6017d09)`() const` 
+
+Get the base of the abstraction (`M`).
+
+In other words the body of the lambda-function.
+
+#### Returns
+[LambdaExpression](#classLambdaExpression) const* Not null [LambdaExpression](#classLambdaExpression).
 
 #### `public const `[`BoundedVariable`](#classAbstraction_1_1BoundedVariable)` * `[`getBoundedVariable`](#classAbstraction_1a45bfe7911111519d4bfc0f13b1e7581b)`() const` 
 
@@ -81,6 +91,8 @@ Applying a function to an argument, $ (M N) $, where `M` and `N` are lambda term
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `public  `[`Application`](#classApplication_1ab35fbc71c5973f5ece36792e5ffddd48)`(const `[`LambdaExpression`](#classLambdaExpression)` * base,const `[`LambdaExpression`](#classLambdaExpression)` * argument)` | Construct a new [Application](#classApplication) object.
+`public const `[`LambdaExpression`](#classLambdaExpression)` * `[`getBase`](#classApplication_1a3797fabf8dcbd391a8c9787a16e0d4d0)`() const` | Get the base of application (`M`).
+`public const `[`LambdaExpression`](#classLambdaExpression)` * `[`getAgrument`](#classApplication_1a5753e613491c3ac045bded2b00dceab4)`() const` | Get the argument to be applied to the lambda term`.
 `public virtual  `[`~Application`](#classApplication_1a748bca84fefb9c12661cfaa2f623748d)`()` | 
 `protected virtual bool `[`Equals`](#classApplication_1a07ab7a13e74703c62c893c2235b80493)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` | Virtual function for compare 2 lambda expressions. Used in `operator==`.
 
@@ -94,6 +106,22 @@ Construct a new [Application](#classApplication) object.
 * `base` function (`M`) lambda term. 
 
 * `argument` argument (`N`) lambda term.
+
+#### `public const `[`LambdaExpression`](#classLambdaExpression)` * `[`getBase`](#classApplication_1a3797fabf8dcbd391a8c9787a16e0d4d0)`() const` 
+
+Get the base of application (`M`).
+
+In other words the lambda-function.
+
+#### Returns
+[LambdaExpression](#classLambdaExpression) const* Not null [LambdaExpression](#classLambdaExpression).
+
+#### `public const `[`LambdaExpression`](#classLambdaExpression)` * `[`getAgrument`](#classApplication_1a5753e613491c3ac045bded2b00dceab4)`() const` 
+
+Get the argument to be applied to the lambda term`.
+
+#### Returns
+[LambdaExpression](#classLambdaExpression) const* Not null [LambdaExpression](#classLambdaExpression).
 
 #### `public virtual  `[`~Application`](#classApplication_1a748bca84fefb9c12661cfaa2f623748d)`()` 
 

@@ -27,6 +27,11 @@ Abstraction::Abstraction(const LambdaExpression *lambda, const Variable &var)
 
 Abstraction::~Abstraction() = default;
 
+LambdaExpression const *Abstraction::getAbstractionBase() const
+{
+    return this->lambda;
+}
+
 Abstraction::BoundedVariable const *Abstraction::getBoundedVariable() const 
 {
     return &(this->abstractVariable);

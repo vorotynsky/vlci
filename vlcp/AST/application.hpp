@@ -41,5 +41,21 @@ public:
      */
     Application(const LambdaExpression *base, const LambdaExpression *argument);
 
+    /**
+     * @brief Get the base of application (`M`).
+     * 
+     * In other words the lambda-function. 
+     * 
+     * @return LambdaExpression const* Not null LambdaExpression.
+     */
+    LambdaExpression const *getBase() const;
+
+    /**
+     * @brief Get the argument to be applied to the lambda term`.
+     * 
+     * @return LambdaExpression const* Not null LambdaExpression.
+     */
+    LambdaExpression const *getAgrument() const;
+
     virtual ~Application();
 };
