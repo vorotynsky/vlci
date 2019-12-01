@@ -22,7 +22,8 @@
 /**
  * @brief The set of typical lambda expressions for testing.
  */
-class LambdaContainer final {
+class LambdaContainer final 
+{
 public:
     const Variable x_var = Variable("x");
     const Variable y_var = Variable("y");

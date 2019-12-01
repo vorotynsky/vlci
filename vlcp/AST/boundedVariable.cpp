@@ -32,7 +32,8 @@ Abstraction const *Abstraction::BoundedVariable::getAbstraction() const
     return this->linkedAbstraction;
 }
 
-bool Abstraction::BoundedVariable::Equals(const LambdaExpression &other) const {
+bool Abstraction::BoundedVariable::Equals(const LambdaExpression &other) const
+{
     auto bvother = static_cast<const BoundedVariable &>(other);
 
     return linkedAbstraction == bvother.linkedAbstraction

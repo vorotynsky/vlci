@@ -32,7 +32,8 @@ Abstraction::BoundedVariable const *Abstraction::getBoundedVariable() const
     return &(this->abstractVariable);
 }
 
-bool Abstraction::Equals(const LambdaExpression &other) const {
+bool Abstraction::Equals(const LambdaExpression &other) const 
+{
     auto aother = static_cast<const Abstraction &>(other);
     
     auto variable = static_cast<const Variable &>(abstractVariable);

@@ -23,7 +23,8 @@
  * 
  * Applying a function to an argument, \f$ (M N) \f$, where `M` and `N` are lambda terms.
  */
-class Application final : public LambdaExpression {
+class Application final : public LambdaExpression 
+{
 private:
     const LambdaExpression *base;
     const LambdaExpression *argument;
