@@ -26,6 +26,9 @@
 TEST_CASE("equality of application", "[ast]")
 {
     LambdaContainer lambdas = LambdaContainer();
+    
+    REQUIRE(lambdas.lambdas.size() > 1);
+    
     for (auto lambda1 : lambdas.lambdas)
         for (auto lambda2 : lambdas.lambdas)
             CHECK(Application(lambda1, lambda2) == Application(lambda1, lambda2));
@@ -35,6 +38,8 @@ TEST_CASE("inequality of application", "[ast]")
 {
     LambdaContainer lambdas = LambdaContainer();
     std::vector<Application> applications;
+    
+    REQUIRE(lambdas.lambdas.size() > 1);
 
     for (const auto lambda1 : lambdas.lambdas)
         for (const auto lambda2 : lambdas.lambdas)

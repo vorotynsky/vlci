@@ -28,6 +28,10 @@
 TEST_CASE("equality of abstraction", "[ast]")
 {
     LambdaContainer lambdas = LambdaContainer();
+
+    REQUIRE(lambdas.lambdas.size() > 1);
+    REQUIRE(lambdas.names.size() > 1);
+
     for (auto lambda1 : lambdas.lambdas)
     {
         for (auto name: lambdas.names)
@@ -44,6 +48,9 @@ TEST_CASE("inequality of abstraction", "[ast]")
 {
     LambdaContainer lambdas = LambdaContainer();
     std::vector<Abstraction> abstractions;
+    
+    REQUIRE(lambdas.lambdas.size() > 1);
+    REQUIRE(lambdas.names.size() > 1);
 
     for (auto lambda1 : lambdas.lambdas)
         for (auto name : lambdas.names)

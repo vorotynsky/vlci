@@ -26,22 +26,25 @@
 
 TEST_CASE("equality of variables", "[ast]")
 {
-    LambdaContainer container;
-    for (auto name : container.names)
+    LambdaContainer lambdas;
+
+    REQUIRE(lambdas.names.size() > 1);
+
+    for (auto name : lambdas.names)
         REQUIRE((Variable(name) == (Variable(name))));
 }
 
 TEST_CASE("inequality of variables", "[ast]")
 {
-    LambdaContainer container;
-    std::vector<Variable> variables1;
+    LambdaContainer lambdas;
+    std::vector<Variable> variables;
 
-    for (const auto &name : container.names)
-        variables1.push_back(Variable(name));
+    REQUIRE(lambdas.names.size() > 1);
+    
+    for (const auto &name : lambdas.names)
+        variables.push_back(Variable(name));
 
-    REQUIRE(container.names.size() > 1);
-    for (int i = 1; i < container.names.size(); ++i)
-    {
-        CHECK(variables1[i - 1] != variables1[i]);
-    }
+    for (int i = 1; i < variables.size(); ++i)
+        for (int j = 0; j < i; ++j)
+            CHECK(variables[i] != variables[j]);
 }
