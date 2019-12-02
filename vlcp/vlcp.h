@@ -26,3 +26,9 @@
 
 #include "Lexer/tokens.hpp"
 #include "Lexer/lexer.hpp"
+
+// Abstract syntax tree
+#include "AST/lambda.hpp"
+#include "AST/variable.hpp"
+#include "AST/application.hpp"
+#include "AST/abstraction.hpp"
