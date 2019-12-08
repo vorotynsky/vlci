@@ -18,21 +18,21 @@
 
 #include <vector>
 #include <iterator>
+#include <stdexcept>
 
-template<typename T>
+template<typename T, typename Allocator = std::allocator<T>>
 class VectorSlice final
 {
-
 private:
-    const std::vector<T> *vector;
+    const std::vector<T, Allocator> *vector;
     const int v_begin, v_end;
+
 public:
+    using iterator = typename std::vector<T, Allocator>::const_iterator;
 
-    using iterator = typename std::vector<T>::iterator;
+    VectorSlice(const std::vector<T, Allocator> *source, int begin, int end);
 
-    VectorSlice(const std::vector<T> *source, int begin, int end);
-
-    const std::vector<T> *getVector() const;
+    const std::vector<T, Allocator> *getVector() const;
     std::size_t size() const;
     
     const T &operator[] (int id) const;
@@ -40,3 +40,41 @@ public:
     iterator begin() const;
     iterator end() const;
 };
+
+// REALIZATION
+
+template<typename T, typename Allocator>
+VectorSlice<T, Allocator>::VectorSlice(const std::vector<T, Allocator> *source, int begin, int end)
+    : vector(source), v_begin(begin), v_end(end) 
+{
+    if (source == nullptr)
+        throw std::invalid_argument("source is null.");
+    
+    if (source->size() < begin || source->size() < end || begin < 0 || end < 0 || begin > end)
+        throw std::out_of_range("begin/end is is out of range");
+}
+
+template<typename T, typename Allocator>
+const std::vector<T, Allocator> *VectorSlice<T, Allocator>::getVector() const {
+    return this->vector;
+}
+
+template<typename T, typename Allocator>
+std::size_t VectorSlice<T, Allocator>::size() const {
+    return v_end - v_begin;
+}
+
+template<typename T, typename Allocator>
+const T &VectorSlice<T, Allocator>::operator[](int id) const {
+    return this->vector[v_begin + id];
+}
+
+template<typename T, typename Allocator>
+typename VectorSlice<T, Allocator>::iterator VectorSlice<T, Allocator>::begin() const {
+    return this->vector->begin() + v_begin;
+}
+
+template<typename T, typename Allocator>
+typename VectorSlice<T, Allocator>::iterator VectorSlice<T, Allocator>::end() const {
+    return this->vector->begin() + v_end;
+}
