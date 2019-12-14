@@ -12,6 +12,8 @@ add_executable(tests
     "ast_equality/variable_tests.cpp"
     "ast_equality/application_tests.cpp"
     "ast_equality/abstraction_tests.cpp"
+
+    "parser/vector_slice_tests.cpp"
 )
 
 target_link_libraries(tests
