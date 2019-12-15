@@ -50,7 +50,7 @@ VectorSlice<T, Allocator>::VectorSlice(const std::vector<T, Allocator> *source, 
     if (source == nullptr)
         throw std::invalid_argument("source is null.");
     
-    if (source->size() < begin || source->size() < end || begin < 0 || end < 0 || begin > end)
+    if (((source->size() <= begin || source->size() <= end) && source->size() != 0) || begin < 0 || end < 0 || begin > end)
         throw std::out_of_range("begin/end is is out of range");
 }
 

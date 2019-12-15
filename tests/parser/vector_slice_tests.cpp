@@ -51,3 +51,62 @@ TEST_CASE("nullptr instead of vector", "[vector slice]")
 {
     CHECK_THROWS(VectorSlice<int>(nullptr, 0, 0));
 }
+
+TEST_CASE("one element vector slice", "[vector slice]")
+{
+    std::vector<int> vector = {1, 2, 3, 4, 5, 6, 7, 8};
+    REQUIRE(vector.size() > 1);
+
+    for (int i = 0; i < vector.size() - 1; i++)
+    {
+        VectorSlice<int> slice(&vector, i, i + 1);
+        CHECK(*slice.begin() == vector[i]);
+        CHECK(std::distance(slice.begin(), slice.end()) == 1);
+        CHECK(slice.size() == 1);
+    }
+}
+
+TEST_CASE("vector slice tests", "[vector slice]")
+{
+    std::vector<int> vector = {1, 2, 3, 4, 5, 6, 7, 8};
+    REQUIRE(vector.size() > 1);
+
+    for (int i = 0; i < vector.size() - 1; i++)
+    {
+        for (int j = i + 1; j < vector.size(); j++)
+        {
+            VectorSlice<int> slice(&vector, i, j);
+            
+            auto it = slice.begin();
+            int count  = 0;
+            for (int idx = i; idx < j; idx++)
+            {
+                CHECK(*it == vector[idx]);
+                it++;
+                count++;
+            }
+            CHECK(count == slice.size());
+            CHECK(it == slice.end());
+        }
+    }
+}
+
+TEST_CASE("vector, out of range", "[vector slice]")
+{
+    std::vector<int> vector = {1, 2, 3, 4, 5, 6, 7, 8};
+    REQUIRE(vector.size() > 1);
+    const int delta = 1;
+
+    std::vector<int> indexes(2 * delta);
+    std::iota(indexes.begin(), indexes.begin() + delta, -delta);
+    std::iota(indexes.begin() + delta, indexes.end(), vector.size());
+    
+    for (int i : indexes)
+    {
+        for (int j : indexes)
+        {
+            CAPTURE(i, j);
+            CHECK_THROWS(VectorSlice<int>(&vector, i, j));
+        }
+    }
+}
