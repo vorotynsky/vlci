@@ -8,6 +8,7 @@
 `class `[`LambdaExpression`](#classLambdaExpression) | The base class for lambda expression AST-node.
 `class `[`Lexer`](#classLexer) | A [Lexer](#classLexer) transforms an input to a [Token](#structToken) sequence.
 `class `[`Variable`](#classVariable) | The variable lambda term.
+`class `[`VectorSlice`](#classVectorSlice) | Vector slice is a class that provides slicing functionality for vectors.
 `struct `[`Token`](#structToken) | A [Token](#structToken) is a unit what can be obtained from the input.
 
 # class `Abstraction` 
@@ -274,6 +275,91 @@ Virtual function for compare 2 lambda expressions. Used in `operator==`.
 
 #### Returns
 `false` if the specified tokens are equal to the current tokens; otherwise, `true`.
+
+# class `VectorSlice` 
+
+Vector slice is a class that provides slicing functionality for vectors.
+
+It generates iterator between 2 points of the vector that allows getting elements between points.
+
+#### Parameters
+* `T` Type parameter of a vector. 
+
+* `std::allocator<T>` Allocator parameter of a base vector.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public  `[`VectorSlice`](#classVectorSlice_1abd1f65c8fad5a275231176b8ca50c00b)`(const std::vector< T, Allocator > * source,int begin,int end)` | Slices vector on [begin; end].
+`public const std::vector< T, Allocator > * `[`getVector`](#classVectorSlice_1a8ca377225652da517f2eac7d9b7709e0)`() const` | Get the base vector.
+`public std::size_t `[`size`](#classVectorSlice_1af309cb3f70b6d1af1e4e1b36c8dcc095)`() const` | Compute the size of the slice.
+`public const T & `[`operator[]`](#classVectorSlice_1aad7e7495cf94d08508bd862c34256ab6)`(int id) const` | Returns a reference to the element at specified location pos. No bounds checking is performed.
+`public `[`iterator`](#classVectorSlice_1a510d13073d92568981ff60556d3b7459)` `[`begin`](#classVectorSlice_1af462dd2d8fb492a5dda45478cc575839)`() const` | Returns an iterator to the first element of the slice.
+`public `[`iterator`](#classVectorSlice_1a510d13073d92568981ff60556d3b7459)` `[`end`](#classVectorSlice_1ab3b9c89e1d429b8e77ab79d0caf5cbd9)`() const` | Returns an iterator to the element following the last element of the slice.
+`typedef `[`iterator`](#classVectorSlice_1a510d13073d92568981ff60556d3b7459) | A type that provides a random-access iterator that can read a const element in a slice.
+
+## Members
+
+#### `public  `[`VectorSlice`](#classVectorSlice_1abd1f65c8fad5a275231176b8ca50c00b)`(const std::vector< T, Allocator > * source,int begin,int end)` 
+
+Slices vector on [begin; end].
+
+#### Parameters
+* `source` pointer to a vector. 
+
+* `begin` start index in the vector. 
+
+* `end` last element
+
+#### Exceptions
+* `std::invalid_argument` if the `*source` is `nullptr`. 
+
+* `std::range_error` if the range for an empty vector isn't `(0, 0)`. 
+
+* `std::range_error` if the `begin` isn't on `[0; size of vector)`. 
+
+* `std::range_error` if the `end` isn't on `(0; size of vecor]`.
+
+#### `public const std::vector< T, Allocator > * `[`getVector`](#classVectorSlice_1a8ca377225652da517f2eac7d9b7709e0)`() const` 
+
+Get the base vector.
+
+#### `public std::size_t `[`size`](#classVectorSlice_1af309cb3f70b6d1af1e4e1b36c8dcc095)`() const` 
+
+Compute the size of the slice.
+
+#### Returns
+std::size_t distance between begin and end.
+
+#### `public const T & `[`operator[]`](#classVectorSlice_1aad7e7495cf94d08508bd862c34256ab6)`(int id) const` 
+
+Returns a reference to the element at specified location pos. No bounds checking is performed.
+
+#### Parameters
+* `id` index of the element to return. 
+
+#### Returns
+const T& const reference to the requested element.
+
+#### `public `[`iterator`](#classVectorSlice_1a510d13073d92568981ff60556d3b7459)` `[`begin`](#classVectorSlice_1af462dd2d8fb492a5dda45478cc575839)`() const` 
+
+Returns an iterator to the first element of the slice.
+
+#### `public `[`iterator`](#classVectorSlice_1a510d13073d92568981ff60556d3b7459)` `[`end`](#classVectorSlice_1ab3b9c89e1d429b8e77ab79d0caf5cbd9)`() const` 
+
+Returns an iterator to the element following the last element of the slice.
+
+Used as a placeholder to show the end-point of the slice.
+
+#### Returns
+iterator Iterator to the element following the last element.
+
+#### `typedef `[`iterator`](#classVectorSlice_1a510d13073d92568981ff60556d3b7459) 
+
+A type that provides a random-access iterator that can read a const element in a slice.
+
+A type [VectorSlice::iterator](#classVectorSlice_1a510d13073d92568981ff60556d3b7459) cannot be used to modify the value of an element.
 
 # struct `Token` 
 

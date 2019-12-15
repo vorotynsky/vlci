@@ -20,6 +20,14 @@
 #include <iterator>
 #include <stdexcept>
 
+/**
+ * @brief Vector slice is a class that provides slicing functionality for vectors.
+ * 
+ * It generates iterator between 2 points of the vector that allows getting elements between points.
+ * 
+ * @tparam T Type parameter of a vector.
+ * @tparam std::allocator<T> Allocator parameter of a base vector.
+ */
 template<typename T, typename Allocator = std::allocator<T>>
 class VectorSlice final
 {
@@ -28,16 +36,59 @@ private:
     const int v_begin, v_end;
 
 public:
+    /**
+     * @brief A type that provides a random-access iterator that can read a const element in a slice.
+     * 
+     * @remark A type VectorSlice::iterator cannot be used to modify the value of an element.
+     */
     using iterator = typename std::vector<T, Allocator>::const_iterator;
 
+    /**
+     * @brief Slices vector on [begin; end].
+     * 
+     * @param source pointer to a vector.
+     * @param begin start index in the vector.
+     * @param end last element
+     * 
+     * @throw std::invalid_argument if the `*source` is `nullptr`.
+     * @throw std::range_error if the range for an empty vector isn't `(0, 0)`.
+     * @throw std::range_error if the `begin` isn't on `[0; size of vector)`.
+     * @throw std::range_error if the `end` isn't on `(0; size of vecor]`.
+     */
     VectorSlice(const std::vector<T, Allocator> *source, int begin, int end);
 
+    /**
+     * @brief Get the base vector.
+     */
     const std::vector<T, Allocator> *getVector() const;
+
+    /**
+     * @brief Compute the size of the slice.
+     * 
+     * @return std::size_t distance between begin and end.
+     */
     std::size_t size() const;
     
+    /**
+     * @brief Returns a reference to the element at specified location pos. No bounds checking is performed.
+     * 
+     * @param id index of the element to return.
+     * @return const T& const reference to the requested element.
+     */
     const T &operator[] (int id) const;
 
+    /**
+     * @brief Returns an iterator to the first element of the slice.
+     */
     iterator begin() const;
+
+    /**
+     * @brief Returns an iterator to the element following the last element of the slice. 
+     * 
+     * Used as a placeholder to show the end-point of the slice.
+     * 
+     * @return iterator Iterator to the element following the last element. 
+     */
     iterator end() const;
 };
 
