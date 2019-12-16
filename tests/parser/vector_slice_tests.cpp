@@ -40,7 +40,7 @@ TEST_CASE("empty vector out of range", "[vector slice]")
     {
         for (int j = -3; j < 3; j++)
         {
-            if (i == j == 0)
+            if (i == 0 && j == 0)
                 break;
             CHECK_THROWS(new VectorSlice<int>(&vector, i, j));
         }
@@ -49,7 +49,7 @@ TEST_CASE("empty vector out of range", "[vector slice]")
 
 TEST_CASE("nullptr instead of vector", "[vector slice]")
 {
-    CHECK_THROWS(VectorSlice<int>(nullptr, 0, 0));
+    CHECK_THROWS_AS(VectorSlice<int>(nullptr, 0, 0), std::invalid_argument);
 }
 
 TEST_CASE("one element vector slice", "[vector slice]")
@@ -59,7 +59,7 @@ TEST_CASE("one element vector slice", "[vector slice]")
 
     for (int i = 0; i < vector.size() - 1; i++)
     {
-        VectorSlice<int> slice(&vector, i, i + 1);
+        VectorSlice<int> slice(&vector, i, i + 1); 
         CHECK(*slice.begin() == vector[i]);
         CHECK(std::distance(slice.begin(), slice.end()) == 1);
         CHECK(slice.size() == 1);

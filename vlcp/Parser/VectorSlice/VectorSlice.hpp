@@ -49,9 +49,21 @@ VectorSlice<T, Allocator>::VectorSlice(const std::vector<T, Allocator> *source, 
 {
     if (source == nullptr)
         throw std::invalid_argument("source is null.");
-    
-    if (((source->size() <= begin || source->size() <= end) && source->size() != 0) || begin < 0 || end < 0 || begin > end)
-        throw std::out_of_range("begin/end is is out of range");
+
+    if (source->size() == 0)
+    {
+        if (begin != 0 || end != 0)
+            throw std::range_error("for empty slices with empty vector use begin = 0 and end = 0.");
+    }
+    else
+    {
+        if (begin >= end)
+            throw std::range_error("begin must be bigger than end (begin < end).");
+        if (begin >= source->size() || begin < 0)
+            throw std::range_error("begin isn't on range [0; size).");
+        if (end > source->size() || end < 0)
+            throw std::range_error("end isn't on range (0; size]");
+    }
 }
 
 template<typename T, typename Allocator>
