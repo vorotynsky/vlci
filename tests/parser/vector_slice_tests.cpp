@@ -102,11 +102,6 @@ TEST_CASE("vector, out of range", "[vector slice]")
     std::iota(indexes.begin() + delta, indexes.end(), vector.size());
     
     for (int i : indexes)
-    {
         for (int j : indexes)
-        {
-            CAPTURE(i, j);
             CHECK_THROWS(VectorSlice<int>(&vector, i, j));
-        }
-    }
 }

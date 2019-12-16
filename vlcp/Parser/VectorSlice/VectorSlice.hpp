@@ -55,26 +55,31 @@ VectorSlice<T, Allocator>::VectorSlice(const std::vector<T, Allocator> *source, 
 }
 
 template<typename T, typename Allocator>
-const std::vector<T, Allocator> *VectorSlice<T, Allocator>::getVector() const {
+const std::vector<T, Allocator> *VectorSlice<T, Allocator>::getVector() const 
+{
     return this->vector;
 }
 
 template<typename T, typename Allocator>
-std::size_t VectorSlice<T, Allocator>::size() const {
+std::size_t VectorSlice<T, Allocator>::size() const 
+{
     return v_end - v_begin;
 }
 
 template<typename T, typename Allocator>
-const T &VectorSlice<T, Allocator>::operator[](int id) const {
+const T &VectorSlice<T, Allocator>::operator[](int id) const 
+{
     return this->vector[v_begin + id];
 }
 
 template<typename T, typename Allocator>
-typename VectorSlice<T, Allocator>::iterator VectorSlice<T, Allocator>::begin() const {
+typename VectorSlice<T, Allocator>::iterator VectorSlice<T, Allocator>::begin() const 
+{
     return this->vector->begin() + v_begin;
 }
 
 template<typename T, typename Allocator>
-typename VectorSlice<T, Allocator>::iterator VectorSlice<T, Allocator>::end() const {
+typename VectorSlice<T, Allocator>::iterator VectorSlice<T, Allocator>::end() const 
+{
     return this->vector->begin() + v_end;
 }
