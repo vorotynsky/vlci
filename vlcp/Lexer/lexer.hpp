@@ -30,6 +30,7 @@ class Lexer
 private:
     std::istream &input;
     Token cur_token;
+    std::size_t possition = 0;
 
     static const std::map<char, Token> charToken;
 
@@ -58,4 +59,11 @@ public:
      * @return Token The read token.
      */
     Token current();
+
+    /**
+     * @brief Returns the possition of the lexer.
+     * 
+     * @return long the possition in tokens.
+     */
+    std::size_t getPossition();
 };

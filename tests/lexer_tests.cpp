@@ -26,12 +26,14 @@ TEST_CASE("empty input", "[lexer]")
     std::istringstream input("");
     Lexer lexer(input);
 
+    CHECK(lexer.getPossition() == 0);
     CHECK(lexer.current() == Token());
 
     Token eof = Token(Token::EoF);
     for (int i = 0; i < 16; i++) 
     {
         lexer.moveNext();
+        CHECK(lexer.getPossition() == 0);
         CHECK(lexer.current() == eof);
     }
 }
@@ -110,9 +112,11 @@ TEST_CASE("y-combinator", "[lexer]")
 
     Lexer lexer(input);
 
-    for (auto token : tokens)
+    CHECK(lexer.getPossition() == 0);
+    for (int i = 0; i < tokens.size(); ++i)
     {
         lexer.moveNext();
-        CHECK(lexer.current() == token);    
+        CHECK(lexer.getPossition() == i);
+        CHECK(lexer.current() == tokens[i]);    
     }
 }

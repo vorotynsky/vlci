@@ -212,6 +212,7 @@ A [Lexer](#classLexer) transforms an input to a [Token](#structToken) sequence.
 `public  `[`Lexer`](#classLexer_1a5e36e6c7693052b2fc7ae4baf2620caa)`(std::istream & is)` | Creates a new [Lexer](#classLexer) instance based on the input stream.
 `public void `[`moveNext`](#classLexer_1a2b644d8f7a7a48a21142c437b7af2cc2)`()` | Read the next [Token](#structToken) from the stream.
 `public `[`Token`](#structToken)` `[`current`](#classLexer_1a9d44d93ff6699aa22a339b13c0618a5a)`()` | Returns the token that was read from the stream.
+`public std::size_t `[`getPossition`](#classLexer_1a43ddb5dab13b233ae3b1652c3a7a0cae)`()` | Returns the possition of the lexer.
 
 ## Members
 
@@ -234,6 +235,13 @@ In case the function [Lexer::moveNext()](#classLexer_1a2b644d8f7a7a48a21142c437b
 
 #### Returns
 [Token](#structToken) The read token.
+
+#### `public std::size_t `[`getPossition`](#classLexer_1a43ddb5dab13b233ae3b1652c3a7a0cae)`()` 
+
+Returns the possition of the lexer.
+
+#### Returns
+long the possition in tokens.
 
 # class `Variable` 
 

@@ -83,9 +83,17 @@ Token Lexer::makeToken()
 
 void Lexer::moveNext() 
 {
+    if (cur_token.getType() != Token::EoF && cur_token.getType() != Token::EMPTY)
+        ++possition;
     cur_token = makeToken();
 }
 
-Token Lexer::current() {
+Token Lexer::current() 
+{
     return this->cur_token;
+}
+
+std::size_t Lexer::getPossition()
+{
+    return this->possition;
 }
