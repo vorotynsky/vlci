@@ -1,5 +1,5 @@
 // Vorotynsky's lambda calculus interpreter
-// Copyright (C) 2019  Vorotynsky Maxim
+// Copyright (C) 2019-2020  Vorotynsky Maxim
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -32,3 +32,6 @@
 #include "AST/variable.hpp"
 #include "AST/application.hpp"
 #include "AST/abstraction.hpp"
+
+// Parser
+#include "Parser/parsedTree.hpp"
