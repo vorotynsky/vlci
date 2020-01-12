@@ -8,11 +8,19 @@ set(CMAKE_EXECUTABLE_SUFFIX ".exe")
 add_subdirectory ("vlcp")
 add_subdirectory ("client")
 
-option(ENABLE_TESTING "Enable or disable testing of vlci components" ON)
+# TESTING
+option(ENABLE_TESTING "Enable or disable testing of vlci components" OFF)
 
 if (ENABLE_TESTING)
     enable_testing()
     add_subdirectory("tests")
 endif()
 
-add_subdirectory("docs")
+
+# DOCUMENTATION
+find_package(Doxygen)
+option(GENERATE_DOCS "Genetates documentation (require Doxygen)" DOXYGEN_FOUND)
+
+if (GENERATE_DOCS)
+    add_subdirectory("docs")
+endif()

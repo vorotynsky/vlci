@@ -29,8 +29,8 @@ By default testing added to cmake file. `ENABLE_TESTING` is a parameter to enabl
 > Testing requires `Catch2`.
 
 ```bash
-cmake --DENABLE_TESTING=OFF . # turn off testing OR
-cmake --DENABLE_TESTING=ON  . # turn on testing
+cmake -DENABLE_TESTING=OFF . # turn off testing OR
+cmake -DENABLE_TESTING=ON  . # turn on testing
 
 cmake --build .
 ctest .
@@ -43,7 +43,7 @@ To enable/disable documentation generating toggle `GENERATE_DOCS`. Documentation
 > Documentation building requires `Doxygen` and `moxygen`.
 
 ```bash
-cmake --DGENERATE_DOCS=ON  .
+cmake -DGENERATE_DOCS=ON  .
 
 # build only documentation
 cmake --build . --target documentation
