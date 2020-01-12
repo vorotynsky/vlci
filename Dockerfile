@@ -9,10 +9,7 @@ RUN apt-get update && apt-get install -y \
 ENV CC=/usr/bin/gcc
 ENV CXX=/usr/bin/g++
 
-ADD "./CMakeLists.txt" "/vlci/"
-ADD "./tests" "/vlci/tests"
-ADD "./vlcp" "/vlci/vlcp"
-ADD "./client" "/vlci/client"
+ADD "." "/vlci"
 
 RUN chmod u+x "/vlci/tests/run_tests.sh"
 ENTRYPOINT [ "/vlci/tests/run_tests.sh" ]

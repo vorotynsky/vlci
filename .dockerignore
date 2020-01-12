@@ -1,0 +1,27 @@
+# config files
+**/.*/
+**/.*
+
+# Cmake files
+**/CMake*
+**/CMake*/
+**/*.cmake
+!**/CMakeLists.txt
+
+# root files
+LICENSE
+README.md
+docs/
+
+# build files
+**/*.exe
+**/Makefile
+**/*.a
+**/*.lib
+build/
+Testing/
+node_modules/
+
+# unignore Catch2 files
+!tests/lib/Catch2/Cmake*
+!tests/lib/Catch2/*
