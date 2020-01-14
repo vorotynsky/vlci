@@ -18,9 +18,10 @@
 
 #include "VectorSlice/VectorSlice.hpp"
 #include "../Lexer/tokens.hpp"
+#include "../Lexer/lexer.hpp"
 #include "../AST/lambda.hpp"
 
-class ParsedTree 
+class ParsedTree final
 {
 public:
 
@@ -38,7 +39,14 @@ public:
 
     const Node *getTree() const;
 
+    static ParsedTree* build(Lexer &lexer);
+
+    ParsedTree(const ParsedTree &tree) = delete;
+    ~ParsedTree();
+
 private:
+    ParsedTree() = default;
+
     std::vector<Token> tokens;
     Node *tree;
 };

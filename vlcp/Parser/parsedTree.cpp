@@ -32,3 +32,60 @@ const ParsedTree::Node *ParsedTree::getTree() const
 {
     return this->tree;
 }
+
+// build
+
+inline bool isEnd(Lexer &lexer)
+{
+    Token::TokenType type = lexer.current().getType();
+    return type == Token::EMPTY || type == Token::EoF || type == Token::LF;
+}
+
+ParsedTree::Node *buildNode(Lexer &lexer, std::vector<Token> &readedTokens)
+{
+    const int start_index = readedTokens.size();
+    if (lexer.current().getType() == Token::EMPTY)
+        lexer.moveNext();
+
+    if (isEnd(lexer))
+        return nullptr;
+
+    std::vector<const LambdaExpression *> childs;
+    while (lexer.current().getType() != Token::RIGHT_BRACKET)
+    {
+        if (lexer.current().getType() == Token::LEFT_BRACKET)
+            childs.push_back(buildNode(lexer, readedTokens));
+        if (isEnd(lexer))
+            throw std::domain_error("expression is not complete.");
+        
+        readedTokens.push_back(lexer.current());
+        lexer.moveNext();
+    }
+
+    auto slice = VectorSlice<Token>(&readedTokens, start_index, readedTokens.size());
+    return new ParsedTree::Node(slice, childs);
+}
+
+ParsedTree *ParsedTree::build(Lexer &lexer)
+{
+    ParsedTree *tree = new ParsedTree();
+    tree->tree = buildNode(lexer, (tree->tokens));
+    return tree;
+}
+
+void free_tree(const ParsedTree::Node *tree)
+{
+    if (tree == nullptr)
+        return;
+    for (auto t : tree->childs)
+    {
+        auto nt = dynamic_cast<const ParsedTree::Node *>(t);
+        free_tree(nt);
+    }
+    delete tree;
+}
+
+ParsedTree::~ParsedTree()
+{
+    free_tree(tree);
+}
