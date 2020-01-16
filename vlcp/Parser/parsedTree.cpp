@@ -41,35 +41,49 @@ inline bool isEnd(Lexer &lexer)
     return type == Token::EMPTY || type == Token::EoF || type == Token::LF;
 }
 
-ParsedTree::Node *buildNode(Lexer &lexer, std::vector<Token> &readedTokens)
+ParsedTree::Node *buildInBrackets(Lexer &lexer, std::vector<Token> &readedTokens)
 {
-    const int start_index = readedTokens.size();
-    if (lexer.current().getType() == Token::EMPTY)
-        lexer.moveNext();
+    if (lexer.current().getType() != Token::LEFT_BRACKET)
+        throw std::domain_error("The expression in brakets must start from a left bracket.");
 
-    if (isEnd(lexer))
-        return nullptr;
+    readedTokens.push_back(lexer.current());
+    const size_t start_index = readedTokens.size();
 
+    const Token rightBracket = Token(Token::RIGHT_BRACKET);
     std::vector<const LambdaExpression *> childs;
-    while (lexer.current().getType() != Token::RIGHT_BRACKET)
+    for (lexer.moveNext(); lexer.current() != rightBracket; lexer.moveNext())
     {
-        if (lexer.current().getType() == Token::LEFT_BRACKET)
-            childs.push_back(buildNode(lexer, readedTokens));
         if (isEnd(lexer))
-            throw std::domain_error("expression is not complete.");
-        
-        readedTokens.push_back(lexer.current());
-        lexer.moveNext();
-    }
+            throw std::domain_error("The expression has the wrong bracket order.");
+        if (lexer.current() == rightBracket)
+            childs.push_back(buildInBrackets(lexer, readedTokens));
 
-    auto slice = VectorSlice<Token>(&readedTokens, start_index, readedTokens.size());
+        readedTokens.push_back(lexer.current());
+    }
+    
+    VectorSlice<Token> slice(&readedTokens, start_index, readedTokens.size());
     return new ParsedTree::Node(slice, childs);
 }
 
 ParsedTree *ParsedTree::build(Lexer &lexer)
 {
     ParsedTree *tree = new ParsedTree();
-    tree->tree = buildNode(lexer, (tree->tokens));
+
+    if (lexer.current().getType() == Token::EMPTY)
+        lexer.moveNext();
+
+    std::vector<const LambdaExpression *> childs;
+    while (!isEnd(lexer))
+    {
+        if (lexer.current().getType() == Token::LEFT_BRACKET)
+            childs.push_back(buildInBrackets(lexer, (tree->tokens)));
+        tree->tokens.push_back(lexer.current());
+        lexer.moveNext();
+    }
+
+    auto slice = VectorSlice<Token>(&(tree->tokens), 0, tree->tokens.size());
+    tree->tree = new ParsedTree::Node(slice, childs);
+
     return tree;
 }
 
