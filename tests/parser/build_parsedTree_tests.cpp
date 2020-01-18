@@ -142,3 +142,27 @@ TEST_CASE("y-combinator brackets", "[bracket parser]")
 
     delete tree;
 }
+
+TEST_CASE("wrong brackets order", "[bracket parser]")
+{
+    std::string expressions =
+        "(\\x.x\n"
+        "\\x.x) a\n"
+        "((\\x.x) a\n"
+        "(\\x.x) a )\n"
+        ")()(\n";
+    std::istringstream ss(expressions);
+    Lexer lexer(ss);
+
+    const size_t count = std::count(expressions.begin(), expressions.end(), '\n');
+
+    for (size_t i = 0; i < count; i++)
+    {
+        CHECK_THROWS(ParsedTree::build(lexer));
+
+        while (lexer.current() != Token::LF)
+            lexer.moveNext();
+        lexer.moveNext();
+    }
+    
+}
