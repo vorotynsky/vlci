@@ -43,19 +43,22 @@ inline bool isEnd(Lexer &lexer)
 
 ParsedTree::Node *buildInBrackets(Lexer &lexer, std::vector<Token> &readedTokens)
 {
-    if (lexer.current().getType() != Token::LEFT_BRACKET)
+    const Token rightBracket = Token(Token::RIGHT_BRACKET),
+                leftBrakcet  = Token(Token::LEFT_BRACKET);
+
+    if (lexer.current() != leftBrakcet)
         throw std::domain_error("The expression in brakets must start from a left bracket.");
 
     readedTokens.push_back(lexer.current());
+
     const size_t start_index = readedTokens.size();
 
-    const Token rightBracket = Token(Token::RIGHT_BRACKET);
     std::vector<const LambdaExpression *> childs;
     for (lexer.moveNext(); lexer.current() != rightBracket; lexer.moveNext())
     {
         if (isEnd(lexer))
             throw std::domain_error("The expression has the wrong bracket order.");
-        if (lexer.current() == rightBracket)
+        if (lexer.current().getType() == Token::LEFT_BRACKET)
             childs.push_back(buildInBrackets(lexer, readedTokens));
 
         readedTokens.push_back(lexer.current());
@@ -75,6 +78,8 @@ ParsedTree *ParsedTree::build(Lexer &lexer)
     std::vector<const LambdaExpression *> childs;
     while (!isEnd(lexer))
     {
+        if (lexer.current().getType() == Token::RIGHT_BRACKET)
+            throw std::domain_error("The expression has the wrong bracket order.");
         if (lexer.current().getType() == Token::LEFT_BRACKET)
             childs.push_back(buildInBrackets(lexer, (tree->tokens)));
         tree->tokens.push_back(lexer.current());
