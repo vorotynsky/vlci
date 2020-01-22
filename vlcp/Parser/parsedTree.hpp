@@ -21,15 +21,30 @@
 #include "../Lexer/lexer.hpp"
 #include "../AST/lambda.hpp"
 
+
+/**
+ * @brief The class that contains a parsed tree by brackets.
+ * 
+ * It contains data such as:
+ *  - parsed tokens,
+ *  - the root of the parsed tree.
+ */
 class ParsedTree final
 {
 public:
 
+    /// @brief The parsed tree node contains a token slice and its children.
     struct Node : LambdaExpression
     {
         const VectorSlice<Token> tokens;
         const std::vector<const LambdaExpression *> childs;
 
+        /**
+         * @brief Construct a new Node object.
+         * 
+         * @param tokens tokens that will be associated with the node.
+         * @param childs childs of the new node.
+         */
         Node(const VectorSlice<Token> &tokens, const std::vector<const LambdaExpression *> &childs);
         virtual ~Node() = default;
     
@@ -37,10 +52,26 @@ public:
         bool Equals(const LambdaExpression &other) const override;
     };
 
+    /**
+     * @brief Get the root of parsed tree.
+     * 
+     * @return const Node* const pointer to the root.
+     */
     const Node *getTree() const;
 
+    /**
+     * @brief Parse the bracket tree from a Lexer.
+     * 
+     * Reads a one line with a expression.
+     * 
+     * @throw std::domain_error if the expression has wrong bracket order.
+     * 
+     * @param lexer The lexer with one or more rows.
+     * @return ParsedTree* builded parsed tree. `not null`
+     */
     static ParsedTree* build(Lexer &lexer);
 
+    /// @brief The ParsedTree can't be copied.
     ParsedTree(const ParsedTree &tree) = delete;
     ~ParsedTree();
 
