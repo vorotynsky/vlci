@@ -7,8 +7,10 @@
 `class `[`Abstraction::BoundedVariable`](#classAbstraction_1_1BoundedVariable) | The bounded variable lambda term.
 `class `[`LambdaExpression`](#classLambdaExpression) | The base class for lambda expression AST-node.
 `class `[`Lexer`](#classLexer) | A [Lexer](#classLexer) transforms an input to a [Token](#structToken) sequence.
+`class `[`ParsedTree`](#classParsedTree) | The class that contains a parsed tree by brackets.
 `class `[`Variable`](#classVariable) | The variable lambda term.
 `class `[`VectorSlice`](#classVectorSlice) | Vector slice is a class that provides slicing functionality for vectors.
+`struct `[`ParsedTree::Node`](#structParsedTree_1_1Node) | The parsed tree node contains a token slice and its children.
 `struct `[`Token`](#structToken) | A [Token](#structToken) is a unit what can be obtained from the input.
 
 # class `Abstraction` 
@@ -236,6 +238,39 @@ In case the function [Lexer::moveNext()](#classLexer_1a2b644d8f7a7a48a21142c437b
 #### Returns
 [Token](#structToken) The read token.
 
+# class `ParsedTree` 
+
+The class that contains a parsed tree by brackets.
+
+It contains data such as:
+
+* parsed tokens,
+
+* the root of the parsed tree.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public const `[`Node`](#structParsedTree_1_1Node)` * `[`getTree`](#classParsedTree_1a09d739e54fdbec4e5ee8796358198793)`() const` | Get the root of parsed tree.
+`public  `[`ParsedTree`](#classParsedTree_1ac9c5fa8ddb70c52b2e03a27b0541fb93)`(const `[`ParsedTree`](#classParsedTree)` & tree) = delete` | The [ParsedTree](#classParsedTree) can't be copied.
+`public  `[`~ParsedTree`](#classParsedTree_1a8581e99b6df1648bee438f13d97677c9)`()` | 
+
+## Members
+
+#### `public const `[`Node`](#structParsedTree_1_1Node)` * `[`getTree`](#classParsedTree_1a09d739e54fdbec4e5ee8796358198793)`() const` 
+
+Get the root of parsed tree.
+
+#### Returns
+const Node* const pointer to the root.
+
+#### `public  `[`ParsedTree`](#classParsedTree_1ac9c5fa8ddb70c52b2e03a27b0541fb93)`(const `[`ParsedTree`](#classParsedTree)` & tree) = delete` 
+
+The [ParsedTree](#classParsedTree) can't be copied.
+
+#### `public  `[`~ParsedTree`](#classParsedTree_1a8581e99b6df1648bee438f13d97677c9)`()` 
+
 # class `Variable` 
 
 ```
@@ -360,6 +395,49 @@ iterator Iterator to the element following the last element.
 A type that provides a random-access iterator that can read a const element in a slice.
 
 A type [VectorSlice::iterator](#classVectorSlice_1a510d13073d92568981ff60556d3b7459) cannot be used to modify the value of an element.
+
+# struct `ParsedTree::Node` 
+
+```
+struct ParsedTree::Node
+  : public LambdaExpression
+```  
+
+The parsed tree node contains a token slice and its children.
+
+## Summary
+
+ Members                        | Descriptions                                
+--------------------------------|---------------------------------------------
+`public const `[`VectorSlice](#classVectorSlice)< [Token`](#structToken)` > `[`tokens`](#structParsedTree_1_1Node_1a04c9149c58505b5eed613f7297254951) | 
+`public const std::vector< const `[`LambdaExpression`](#classLambdaExpression)` * > `[`childs`](#structParsedTree_1_1Node_1a6dc0fd02d238e30c1901e574aa14e7c5) | 
+`public  `[`Node`](#structParsedTree_1_1Node_1abde30e913c7daf9ed49efbeeaba1f01c)`(const `[`VectorSlice](#classVectorSlice)< [Token`](#structToken)` > & tokens,const std::vector< const `[`LambdaExpression`](#classLambdaExpression)` * > & childs)` | Construct a new [Node](#structParsedTree_1_1Node) object.
+`public virtual  `[`~Node`](#structParsedTree_1_1Node_1a71114ef8b4f57c9e4c56e1a44125fb40)`() = default` | 
+`protected virtual bool `[`Equals`](#structParsedTree_1_1Node_1aa052bcdee25509aff319a40ecdf2cc9c)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` | Virtual function for compare 2 lambda expressions. Used in `operator==`.
+
+## Members
+
+#### `public const `[`VectorSlice](#classVectorSlice)< [Token`](#structToken)` > `[`tokens`](#structParsedTree_1_1Node_1a04c9149c58505b5eed613f7297254951) 
+
+#### `public const std::vector< const `[`LambdaExpression`](#classLambdaExpression)` * > `[`childs`](#structParsedTree_1_1Node_1a6dc0fd02d238e30c1901e574aa14e7c5) 
+
+#### `public  `[`Node`](#structParsedTree_1_1Node_1abde30e913c7daf9ed49efbeeaba1f01c)`(const `[`VectorSlice](#classVectorSlice)< [Token`](#structToken)` > & tokens,const std::vector< const `[`LambdaExpression`](#classLambdaExpression)` * > & childs)` 
+
+Construct a new [Node](#structParsedTree_1_1Node) object.
+
+#### Parameters
+* `tokens` tokens that will be associated with the node. 
+
+* `childs` childs of the new node.
+
+#### `public virtual  `[`~Node`](#structParsedTree_1_1Node_1a71114ef8b4f57c9e4c56e1a44125fb40)`() = default` 
+
+#### `protected virtual bool `[`Equals`](#structParsedTree_1_1Node_1aa052bcdee25509aff319a40ecdf2cc9c)`(const `[`LambdaExpression`](#classLambdaExpression)` & other) const` 
+
+Virtual function for compare 2 lambda expressions. Used in `operator==`.
+
+#### Returns
+`false` if the specified tokens are equal to the current tokens; otherwise, `true`.
 
 # struct `Token` 
 

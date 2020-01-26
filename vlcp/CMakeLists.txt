@@ -11,4 +11,5 @@ add_library (LambdaProcessor
     "AST/boundedVariable.cpp"
 
     "Parser/VectorSlice/VectorSlice.hpp"
+    "Parser/parsedTree.cpp"
     )
