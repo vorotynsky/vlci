@@ -35,3 +35,5 @@
 
 // Parser
 #include "Parser/parsedTree.hpp"
+#include "Parser/ruleParser.hpp"
+#include "Parser/Rules/rule.hpp"
